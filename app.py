@@ -1,5 +1,6 @@
 import streamlit as st
 
+<<<<<<< HEAD
 st.title("サンプルアプリ②: 少し複雑なWebアプリ")
 
 st.write("##### 動作モード1: 文字数カウント")
@@ -43,3 +44,40 @@ if st.button("実行"):
 
         else:
             st.error("身長と体重をどちらも入力してください。")   
+=======
+st.title("LLMアプリ")
+st.write("Hello Streamlit")
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+import streamlit as st
+from dotenv import load_dotenv
+import os
+from openai import OpenAI
+
+# .env を読み込む
+load_dotenv()
+
+# APIキー取得
+api_key = os.getenv("OPENAI_API_KEY")
+
+st.title("LLMアプリ テスト")
+
+if not api_key:
+    st.error("OPENAI_API_KEY が読み込めていません")
+else:
+    st.success("APIキーを読み込みました")
+
+    if st.button("LLMに質問する"):
+        client = OpenAI(api_key=api_key)
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "user", "content": "こんにちは。あなたは誰ですか？"}
+            ]
+        )
+
+        st.write(response.choices[0].message.content)
